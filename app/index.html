@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <% for (var meta in htmlWebpackPlugin.options.metas) { %>
+    <meta name="<%= meta %>" content="<%= htmlWebpackPlugin.options.metas[meta] %>">
+    <% } %>
+  </head>
+  <body>
+    <!--[if lt IE 8]>
+      <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div id="<%= htmlWebpackPlugin.options.container.id %>" class="container" role="<%= htmlWebpackPlugin.options.container.role %>"></div>
+  </body>
+</html>
