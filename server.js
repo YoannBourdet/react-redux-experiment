@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const config = require('./webpack.config');
@@ -11,7 +12,7 @@ new WebpackDevServer(webpack(config), {
   },
   historyApiFallback: true,
   headers: { 'Access-Control-Allow-Origin': '*' },
-}).listen(globalConfig.server.port, 'localhost', function(err) {
+}).listen(globalConfig.server.port, 'localhost', (err) => {
   if (err) {
     console.log(err);
   }

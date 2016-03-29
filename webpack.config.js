@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const globalConfig = require('./global.config');
 const onProduction = process.env.NODE_ENV === 'production' ? true : false;
+
 // array of plugins for dev environment
 const pluginsForDev = [
   new HtmlWebpackPlugin({
@@ -21,6 +22,7 @@ const pluginsForDev = [
   }),
   new webpack.HotModuleReplacementPlugin(),
 ];
+
 // array of plugins to add for Prod environment
 const pluginsForProd = [
   new ExtractTextPlugin('styles.css'),
@@ -35,13 +37,13 @@ const pluginsForProd = [
 ];
 
 module.exports = {
-  context: path.join(__dirname, 'app'),
+  context: path.join(__dirname, '/'),
   devtool: 'eval',
   entry: {
     app: [
       'webpack-dev-server/client?http://localhost:' + globalConfig.server.port,
       'webpack/hot/dev-server',
-      './js/entry.js',
+      './app/js/entry.js',
     ],
   },
   resolve: {
