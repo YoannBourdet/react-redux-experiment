@@ -1,5 +1,5 @@
 {
-  "name": "Webpack-React-Sass-Boilerplate",
+  "name": "react-redux-experiment",
   "version": "1.0.0",
   "description": "ligth & simple 'Webpack + React + Scss' boilerplate",
   "main": "index.js",
@@ -11,23 +11,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/YoannnBourdet/Webpack-React-Sass-Boilerplate.git"
+    "url": "git+https://github.com/YoannnBourdet/react-redux-experiment.git"
   },
   "keywords": [
-    "Webpack",
-    "Backbone",
-    "React"
+    "React",
+    "Redux",
+    "Webpack"
   ],
   "author": "Yoann Bourdet",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/YoannnBourdet/Webpack-React-Sass-Boilerplate/issues"
+    "url": "https://github.com/YoannnBourdet/react-redux-experiment/issues"
   },
-  "homepage": "https://github.com/YoannnBourdet/Webpack-React-Sass-Boilerplate",
+  "homepage": "https://github.com/YoannnBourdet/react-redux-experiment",
   "devDependencies": {
     "babel": "^6.1.18",
     "babel-core": "^6.2.1",
     "babel-loader": "^6.2.0",
+    "babel-polyfill": "^6.7.4",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-2": "^6.1.18",
@@ -40,12 +41,17 @@
     "html-webpack-plugin": "^2.1.0",
     "jquery": "^2.1.4",
     "node-sass": "^3.4.2",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
     "react-hot-loader": "^1.3.0",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
     "webpack": "^1.12.9",
     "webpack-dev-server": "^1.14.0"
+  },
+  "dependencies": {
+    "immutable": "^3.7.6",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.4.1",
+    "redux": "^3.3.1"
   }
 }
