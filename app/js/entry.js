@@ -1,30 +1,19 @@
 const globalConfig = require('../../global.config');
+import injectTapEventPlugin from 'react-tap-event-plugin';
+/* Needed for onTouchTap
+ * Can go away when react 1.0 release
+ * Check this repo:
+ * https://github.com/zilverline/react-tap-event-plugin
+ */
+injectTapEventPlugin();
 /* styles */
 import '../scss/main';
 /* App */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './app';
+import App from './containers/app';
 
 ReactDOM.render(
-  <App
-    items={[
-      {name: 'john'},
-      {name: 'harry'},
-      {name: 'yoann'},
-      {name: 'larry'},
-      {name: 'kevin'},
-      {name: 'bob'},
-      {name: 'bobby'},
-      {name: 'jah'},
-      {name: 'michael'},
-      {name: 'jennifer'},
-      {name: 'shawn'},
-      {name: 'danny'},
-      {name: 'brian'},
-      {name: 'clide'},
-      {name: 'foxy'},
-    ]}
-  />,
+  <App/>,
   document.getElementById(globalConfig.staticPage.container.id)
 );

@@ -11,6 +11,9 @@ new WebpackDevServer(webpack(config), {
     colors: true,
   },
   historyApiFallback: true,
+  proxy: {
+    '*': 'http://developer.marvel.com',
+  },
   headers: { 'Access-Control-Allow-Origin': '*' },
 }).listen(globalConfig.server.port, 'localhost', (err) => {
   if (err) {
