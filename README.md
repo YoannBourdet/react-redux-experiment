@@ -2,4 +2,4 @@
 
 ## Introduction
 
-Experimentation with React Redux and Material UI.
+Experimentation with React, Redux and Material UI.
