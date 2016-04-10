@@ -4,5 +4,6 @@
 
 Experimentation with React, Redux and Material UI.
 
-## Installation
+## Description
 
+## Usage

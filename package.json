@@ -35,6 +35,7 @@
     "babel-preset-react": "^6.1.18",
     "babel-preset-stage-0": "^6.5.0",
     "babel-preset-stage-2": "^6.1.18",
+    "blueimp-md5": "^2.3.0",
     "css-loader": "^0.23.0",
     "eslint": "^1.10.1",
     "eslint-config-airbnb": "^1.0.0",
@@ -48,8 +49,10 @@
     "react-tap-event-plugin": "^0.2.2",
     "sass-loader": "^3.1.2",
     "style-loader": "^0.13.0",
+    "toastr": "^2.1.2",
     "webpack": "^1.12.9",
-    "webpack-dev-server": "^1.14.0"
+    "webpack-dev-server": "^1.14.0",
+    "whatwg-fetch": "^0.11.0"
   },
   "dependencies": {
     "immutable": "^3.7.6",
