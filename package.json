@@ -1,7 +1,7 @@
 {
   "name": "react-redux-experiment",
   "version": "1.0.0",
-  "description": "React + Redux experiment",
+  "description": "Experimentation with React, Redux and Material UI",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",

@@ -1,4 +1,4 @@
-import toastr from 'toastr';
+import toastr from '../tools/toastr';
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -15,11 +15,11 @@ export default (path, options = {}) => {
   .then(checkStatus)
   .then((response) => response.json())
   .then((response) => {
-    toastr.success('request succeeded', response);
+    toastr('success', 'request succeeded', response);
     return response;
   })
   .catch((error) => {
-    toastr.warning(error);
-    return Promise.reject('request failed', error);
+    toastr('warning', 'request failed', error);
+    return Promise.reject(error);
   });
 };
