@@ -41,8 +41,8 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:' + globalConfig.server.port,
-      'webpack/hot/dev-server',
+      // 'webpack-dev-server/client?http://localhost:' + globalConfig.server.port,
+      // 'webpack/hot/dev-server',
       './app/js/entry.js',
     ],
   },
