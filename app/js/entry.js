@@ -1,4 +1,4 @@
-const globalConfig = require('../../global.config');
+import { staticPage } from '../../global.config.babel';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 /* Needed for onTouchTap
  * Can go away when react 1.0 release
@@ -15,5 +15,5 @@ import App from './containers/app';
 
 ReactDOM.render(
   <App/>,
-  document.getElementById(globalConfig.staticPage.container.id)
+  document.getElementById(staticPage.container.id)
 );

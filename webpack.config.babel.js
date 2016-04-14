@@ -1,23 +1,24 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const globalConfig = require('./global.config');
+import webpack from 'webpack';
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import { staticPage } from './global.config.babel';
+
 const onProduction = process.env.NODE_ENV === 'production' ? true : false;
 
 // array of plugins for dev environment
 const pluginsForDev = [
   new HtmlWebpackPlugin({
-    template: globalConfig.staticPage.pathToTemplate,
+    template: staticPage.pathToTemplate,
     inject: 'body',
-    title: globalConfig.staticPage.title,
+    title: staticPage.title,
     metas: {
-      keywords: globalConfig.staticPage.metas.keywords,
-      description: globalConfig.staticPage.metas.description,
+      keywords: staticPage.metas.keywords,
+      description: staticPage.metas.description,
     },
     container: {
-      id: globalConfig.staticPage.container.id,
-      role: globalConfig.staticPage.container.role,
+      id: staticPage.container.id,
+      role: staticPage.container.role,
     },
   }),
   new webpack.HotModuleReplacementPlugin(),
@@ -41,7 +42,7 @@ module.exports = {
   devtool: 'eval',
   entry: {
     app: [
-      // 'webpack-dev-server/client?http://localhost:' + globalConfig.server.port,
+      // 'webpack-dev-server/client?http://localhost:' + server.port,
       // 'webpack/hot/dev-server',
       './app/js/entry.js',
     ],
@@ -71,5 +72,5 @@ module.exports = {
       loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
     }],
   },
-  plugins: onProduction ? pluginsForDev.concat(pluginsForProd) : pluginsForDev,
+  plugins: onProduction ? pluginsForDev.push(...pluginsForProd) : pluginsForDev,
 };
