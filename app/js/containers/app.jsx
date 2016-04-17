@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import * as FiltersActions from '../actions';
+import * as FiltersActions from '../actions/filters';
 
 import AutoComplete from 'material-ui/AutoComplete';
 import MyRawTheme from '../theme';
@@ -12,7 +12,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 const muiTheme = getMuiTheme(MyRawTheme);
 
-const mapStateToProps = (state) => ({ filters: state.filter });
+const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
@@ -20,20 +20,18 @@ const mapDispatchToProps = (dispatch) => ({
   },
 });
 
-
-class App extends Component {
+@connect(mapStateToProps, mapDispatchToProps)
+export default class App extends Component {
 
   state = {
     dataSource: [],
+    filter: null,
   };
 
-  handleRequest() {
-    console.log('request ready');
-  }
-
-  handleUpdate() {
-    console.log('update ready');
-  }
+  handleUpdateInput = (value) => {
+    const { actions } = this.props;
+    actions.filters.add('filter', value);
+  };
 
   render() {
     return (
@@ -44,22 +42,10 @@ class App extends Component {
             filter={AutoComplete.fuzzyFilter}
             floatingLabelText="Type t, fuzzy search"
             fullWidth
-            onNewRequest={this.handleRequest.bind(this)}
-            onUpdateInput={this.handleUpdate.bind(this)}
-          />
-          <br/>
-          <AutoComplete
-            dataSource={this.state.dataSource}
-            filter={AutoComplete.caseInsensitiveFilter}
-            floatingLabelText="Type r, case insensitive"
-            fullWidth
-            onNewRequest={this.handleRequest.bind(this)}
-            onUpdateInput={this.handleUpdate.bind(this)}
+            onUpdateInput={this.handleUpdateInput.bind(this)}
           />
         </div>
       </MuiThemeProvider>
     );
   }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
