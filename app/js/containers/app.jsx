@@ -1,108 +1,65 @@
 import React, {Component} from 'react';
-import AutoComplete from 'material-ui/lib/auto-complete';
 
-export default class App extends Component {
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+import * as FiltersActions from '../actions';
+
+import AutoComplete from 'material-ui/AutoComplete';
+import MyRawTheme from '../theme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+const muiTheme = getMuiTheme(MyRawTheme);
+
+const mapStateToProps = (state) => ({ filters: state.filter });
+
+const mapDispatchToProps = (dispatch) => ({
+  actions: {
+    filters: bindActionCreators(FiltersActions, dispatch),
+  },
+});
+
+
+class App extends Component {
+
+  state = {
+    dataSource: [],
+  };
+
+  handleRequest() {
+    console.log('request ready');
+  }
+
+  handleUpdate() {
+    console.log('update ready');
+  }
+
   render() {
-    const fruit = [
-      'Apple',
-      'Apricot',
-      'Avocado',
-      'Banana',
-      'Bilberry',
-      'Blackberry',
-      'Blackcurrant',
-      'Blueberry',
-      'Boysenberry',
-      'Blood Orange',
-      'Cantaloupe',
-      'Currant',
-      'Cherry',
-      'Cherimoya',
-      'Cloudberry',
-      'Coconut',
-      'Cranberry',
-      'Clementine',
-      'Damson',
-      'Date',
-      'Dragonfruit',
-      'Durian',
-      'Elderberry',
-      'Feijoa',
-      'Fig',
-      'Goji berry',
-      'Gooseberry',
-      'Grape',
-      'Grapefruit',
-      'Guava',
-      'Honeydew',
-      'Huckleberry',
-      'Jabouticaba',
-      'Jackfruit',
-      'Jambul',
-      'Jujube',
-      'Juniper berry',
-      'Kiwi fruit',
-      'Kumquat',
-      'Lemon',
-      'Lime',
-      'Loquat',
-      'Lychee',
-      'Nectarine',
-      'Mango',
-      'Marion berry',
-      'Melon',
-      'Miracle fruit',
-      'Mulberry',
-      'Mandarine',
-      'Olive',
-      'Orange',
-      'Papaya',
-      'Passionfruit',
-      'Peach',
-      'Pear',
-      'Persimmon',
-      'Physalis',
-      'Plum',
-      'Pineapple',
-      'Pumpkin',
-      'Pomegranate',
-      'Pomelo',
-      'Purple Mangosteen',
-      'Quince',
-      'Raspberry',
-      'Raisin',
-      'Rambutan',
-      'Redcurrant',
-      'Salal berry',
-      'Satsuma',
-      'Star fruit',
-      'Strawberry',
-      'Squash',
-      'Salmonberry',
-      'Tamarillo',
-      'Tamarind',
-      'Tomato',
-      'Tangerine',
-      'Ugli fruit',
-      'Watermelon',
-    ];
-
-    const colors = [
-      'Red',
-      'Orange',
-      'Yellow',
-      'Green',
-      'Blue',
-      'Purple',
-      'Black',
-      'White',
-    ];
     return (
-      <div>
-        <AutoComplete filter={AutoComplete.fuzzyFilter} floatingLabelText="Type t, fuzzy search" fullWidth dataSource={fruit}/>
-        <br/>
-        <AutoComplete filter={AutoComplete.caseInsensitiveFilter} floatingLabelText="Type r, case insensitive" fullWidth dataSource={colors}/>
-      </div>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div>
+          <AutoComplete
+            dataSource={this.state.dataSource}
+            filter={AutoComplete.fuzzyFilter}
+            floatingLabelText="Type t, fuzzy search"
+            fullWidth
+            onNewRequest={this.handleRequest.bind(this)}
+            onUpdateInput={this.handleUpdate.bind(this)}
+          />
+          <br/>
+          <AutoComplete
+            dataSource={this.state.dataSource}
+            filter={AutoComplete.caseInsensitiveFilter}
+            floatingLabelText="Type r, case insensitive"
+            fullWidth
+            onNewRequest={this.handleRequest.bind(this)}
+            onUpdateInput={this.handleUpdate.bind(this)}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
