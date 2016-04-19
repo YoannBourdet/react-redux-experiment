@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import { staticPage } from './global.config.babel';
 
-const onProduction = process.env.NODE_ENV === 'production' ? true : false;
+const onProduction = process.env.NODE_ENV === 'production';
 
 // array of plugins for dev environment
 const pluginsForDev = [

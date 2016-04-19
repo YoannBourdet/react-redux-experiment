@@ -1,7 +1,6 @@
 import React from 'react';
 import AutoComplete from 'material-ui/lib/auto-complete';
 
-
 const fruit = [
   'Apple', 'Apricot', 'Avocado',
   'Banana', 'Bilberry', 'Blackberry', 'Blackcurrant', 'Blueberry',

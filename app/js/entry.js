@@ -21,6 +21,5 @@ import App from './containers/app';
 render(
   <Provider store={store}>
     <App/>
-  </Provider>,
-  document.getElementById(staticPage.container.id)
+  </Provider>, document.getElementById(staticPage.container.id)
 );
