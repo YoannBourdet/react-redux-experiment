@@ -31,4 +31,4 @@ public
 
 # App config
 server.js
-proxy.js
+global.config.babel.js

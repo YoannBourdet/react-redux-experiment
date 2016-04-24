@@ -19,10 +19,10 @@ export const staticPage = {
 
 export const api = {
   keys: {
-    public: '934a84e99e7f9e70757a026718b6e063',
-    private: 'ade7137ef2f069fa3af6aa11f1005de35829554c',
-    timestamp: 'api',
+    public: 'yourpublickey',
+    private: 'yourprivatekey',
+    timestamp: '1234',
   },
-  md5: md5('apiade7137ef2f069fa3af6aa11f1005de35829554c934a84e99e7f9e70757a026718b6e063'),
-  path: 'http://gateway.marvel.com/v1/public',
+  md5: md5('timestamp + privateKey + publicKey'),
+  path: 'path/to/your/api',
 };

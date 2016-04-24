@@ -1,1 +1,2 @@
-export filters from './filters.js';
+export filters from './filters';
+export categories from './categories';

@@ -7,10 +7,10 @@ const checkStatus = (response) => {
   return response.text().then((text) => Promise.reject(text));
 };
 
-export default (path, options = {}) => {
-  return fetch(
-    'path',
-    Object.assign({credentials: 'same-origin'}, options)
+export default (path, options = {}) =>
+  fetch(
+    path,
+    Object.assign({ credentials: 'same-origin' }, options)
   )
   .then(checkStatus)
   .then((response) => response.json())
@@ -22,4 +22,3 @@ export default (path, options = {}) => {
     toastr('warning', 'request failed', error);
     return Promise.reject(error);
   });
-};

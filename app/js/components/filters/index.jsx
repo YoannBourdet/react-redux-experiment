@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import * as FiltersActions from '../../actions/filters';
+import * as CategoriesActions from '../../actions/categories';
 
 import AutoComplete from 'material-ui/AutoComplete';
 import CheckboxList from './CheckboxList';
@@ -13,6 +14,7 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
   actions: {
     filters: bindActionCreators(FiltersActions, dispatch),
+    categories: bindActionCreators(CategoriesActions, dispatch),
   },
 });
 
@@ -28,7 +30,13 @@ export default class Filters extends Component {
     actions.filters.add('filter', value);
   };
 
+  handleUpdateCheckbox = (value) => {
+    const { actions } = this.props;
+    actions.categories.fetch(value);
+  };
+
   render() {
+    console.log('props', this.props);
     return (
       <div className="filters">
         <AutoComplete
@@ -47,7 +55,7 @@ export default class Filters extends Component {
             { label: 'series', value: 'series' },
             { label: 'stories', value: 'stories' },
           ]}
-          onRequest={this.handleUpdateInput.bind(this)}
+          onRequest={this.handleUpdateCheckbox.bind(this)}
         />
       </div>
     );
