@@ -15,10 +15,10 @@ export default (path, options = {}) =>
   .then(checkStatus)
   .then((response) => response.json())
   .then((response) => {
-    toastr('success', 'request succeeded', response);
+    toastr('success', 'Request succeeded', response);
     return response;
   })
   .catch((error) => {
-    toastr('warning', 'request failed', error);
+    toastr('warning', 'Request failed', error);
     return Promise.reject(error);
   });

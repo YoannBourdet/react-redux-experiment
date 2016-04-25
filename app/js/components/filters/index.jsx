@@ -36,7 +36,6 @@ export default class Filters extends Component {
   };
 
   render() {
-    console.log('props', this.props);
     return (
       <div className="filters">
         <AutoComplete
