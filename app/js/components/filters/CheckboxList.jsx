@@ -12,13 +12,17 @@ export default class CheckboxList extends Component {
     itemChecked: 'characters',
   };
 
+  componentDidMount() {
+    this.props.onRequest(this.state.itemChecked);
+  }
+
   isChecked(label) {
     return this.state.itemChecked === label;
   }
 
-  handleCheck(label) {
-    this.setState({ itemChecked: label });
-    this.props.onRequest(label);
+  handleCheck(itemChecked) {
+    this.setState({ itemChecked });
+    this.props.onRequest(itemChecked);
   }
 
   render() {

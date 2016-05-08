@@ -25,6 +25,7 @@ const pluginsForDev = [
 ];
 
 // array of plugins to add for Prod environment
+/* eslint camelcase: 0 */
 const pluginsForProd = [
   new ExtractTextPlugin('styles.css'),
   new webpack.optimize.UglifyJsPlugin({
@@ -37,15 +38,14 @@ const pluginsForProd = [
   }),
 ];
 
+/* eslint max-len: 0 */
+const hotMiddlewareScript = 'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000&reload=true';
+
 module.exports = {
   context: path.join(__dirname, '/'),
   devtool: 'eval',
   entry: {
-    app: [
-      // 'webpack-dev-server/client?http://localhost:' + server.port,
-      // 'webpack/hot/dev-server',
-      './app/js/entry.js',
-    ],
+    app: [`./app/js/entry.jsx`, hotMiddlewareScript],
   },
   resolve: {
     alias: {},
@@ -60,7 +60,7 @@ module.exports = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loaders: ['react-hot', 'babel'],
+      loaders: ['babel'],
     }, {
       test: /\.(jpe?g|png|gif|svg)$/,
       loader: 'file?name=[path][name].[ext]',

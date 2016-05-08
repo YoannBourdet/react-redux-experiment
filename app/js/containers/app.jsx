@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Filters from '../components/filters/';
-import ContentsList from '../components/Contents/';
+import { Filters } from '../components/filters/';
+import { Contents } from '../components/Contents/';
 
 import MyRawTheme from '../theme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -15,7 +15,7 @@ export default class App extends Component {
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="app">
           <Filters />
-          <ContentsList />
+          <Contents />
         </div>
       </MuiThemeProvider>
     );
