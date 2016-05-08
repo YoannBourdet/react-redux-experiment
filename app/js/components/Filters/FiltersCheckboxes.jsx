@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import Checkbox from 'material-ui/checkbox';
 
-export default class CheckboxList extends Component {
+export default class FiltersCheckboxes extends Component {
 
   static propTypes = {
     items: PropTypes.array.isRequired,
