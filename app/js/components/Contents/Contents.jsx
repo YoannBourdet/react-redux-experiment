@@ -30,7 +30,9 @@ export default class Contents extends Component {
     return (
       <div className="cp-wrapper">
         {list}
-        <Pagination />
+        <Pagination
+          items={20}
+        />
       </div>
     );
   }
