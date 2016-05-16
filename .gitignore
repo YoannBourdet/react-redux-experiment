@@ -28,3 +28,7 @@ node_modules
 
 # Public folder
 public
+
+# App config
+server.js
+global.config.babel.js

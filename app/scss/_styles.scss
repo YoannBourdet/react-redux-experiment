@@ -3,3 +3,37 @@
    ========================================================================== */
 
 @import 'fonts';
+
+.cp-wrapper {
+  padding: 10px;
+  max-width: 900px;
+  margin: 30px auto;
+  border: 1px solid rgb(224, 224, 224);
+  background: rgb(248, 248, 248);
+  box-shadow: rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px;
+}
+
+.cp-pagination {
+  margin-top: 20px;
+  padding: 0;
+  list-style-type: none;
+  li {
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+    padding: 6px 12px;
+    border: 1px solid;
+    border-color: #ddd;
+    margin-left: -1px;
+    min-width: 18px;
+    &:hover {
+      background-color: #ddd;
+    }
+    &.selected,
+    &.selected &:hover {
+      background-color: #00bcd4;
+      border-color: #00bcd4;
+      cursor: default;
+    }
+  }
+}

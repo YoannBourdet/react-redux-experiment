@@ -1,4 +1,4 @@
-import toastr from 'toastr';
+import toastr from '../tools/toastr';
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
@@ -7,19 +7,18 @@ const checkStatus = (response) => {
   return response.text().then((text) => Promise.reject(text));
 };
 
-export default (path, options = {}) => {
-  return fetch(
-    'path',
-    Object.assign({credentials: 'same-origin'}, options)
+export default (path, options = {}) =>
+  fetch(
+    path,
+    Object.assign({ credentials: 'same-origin' }, options)
   )
   .then(checkStatus)
   .then((response) => response.json())
   .then((response) => {
-    toastr.success('request succeeded', response);
+    toastr('success', 'Request succeeded', response);
     return response;
   })
   .catch((error) => {
-    toastr.warning(error);
-    return Promise.reject('request failed', error);
+    toastr('warning', 'Request failed', error);
+    return Promise.reject(error);
   });
-};
