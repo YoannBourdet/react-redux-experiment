@@ -4,9 +4,9 @@ export default class Pagination extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
-    handleSelect: PropTypes.func.isRequired,
-    pageNumber: PropTypes.number.isRequired,
-    selected: PropTypes.bool.isRequired,
+    handleSelect: PropTypes.func,
+    pageNumber: PropTypes.number,
+    selected: PropTypes.bool,
   };
 
   handleSelect(eventKey) {

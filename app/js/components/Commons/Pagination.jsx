@@ -23,6 +23,16 @@ export default class Pagination extends Component {
     this.setState({ activatedPage: eventKey });
   }
 
+  renderEllipis() {
+    const element = (<span>...</span>);
+
+    return (
+      <PaginationButton
+        children={element}
+      />
+    );
+  }
+
   renderItems() {
     const { items, maxButtons } = this.props;
     const calculatedItems = [];
@@ -41,12 +51,7 @@ export default class Pagination extends Component {
     }
 
     for(let i = 1; i <= items; i++) {
-
-      if (
-        i === 1 ||
-        i >= startPages && i <= endPages ||
-        i === items
-      ) {
+      if (i > startPages && i < endPages) {
         const element = (<span>{i}</span>);
 
         calculatedItems.push(
@@ -61,13 +66,43 @@ export default class Pagination extends Component {
       }
     }
 
+    if (endPages !== maxButtons) {
+      const ellipsis = (this.renderEllipis());
+
+      calculatedItems.unshift(ellipsis);
+    }
+
+    if (startPages !== items - maxButtons + 1) {
+      const ellipsis = (this.renderEllipis());
+
+      calculatedItems.push(ellipsis);
+    }
+
     return calculatedItems;
   }
 
+  renderFirstLastButton(num) {
+    const element = (<span>{num}</span>);
+    return (
+      <PaginationButton
+        children={element}
+        handleSelect={this.handleSelect.bind(this)}
+        key={num}
+        pageNumber={num}
+        selected={this.state.activatedPage === num}
+      />
+    );
+  }
+
   render() {
+    const { items } = this.props;
+    const first = 1;
+    const last = items;
     return (
       <ul className="cp-pagination">
+        {this.renderFirstLastButton(first)}
         {this.renderItems()}
+        {this.renderFirstLastButton(last)}
       </ul>
     );
   }
