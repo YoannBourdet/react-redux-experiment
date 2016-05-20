@@ -10,7 +10,10 @@ export default class Pagination extends Component {
   };
 
   handleSelect(eventKey) {
-    this.props.handleSelect(eventKey);
+    const { handleSelect } = this.props;
+    if(handleSelect) {
+      handleSelect(eventKey);
+    }
   }
 
   render() {

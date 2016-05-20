@@ -12,7 +12,7 @@ export default class Pagination extends Component {
   static defaultProps = {
     items: 20,
     activatedPage: 1,
-    maxButtons: 5,
+    maxButtons: 7,
   }
 
   state = {
@@ -21,16 +21,6 @@ export default class Pagination extends Component {
 
   handleSelect(eventKey) {
     this.setState({ activatedPage: eventKey });
-  }
-
-  renderEllipis() {
-    const element = (<span>...</span>);
-
-    return (
-      <PaginationButton
-        children={element}
-      />
-    );
   }
 
   renderItems() {
@@ -67,15 +57,21 @@ export default class Pagination extends Component {
     }
 
     if (endPages !== maxButtons) {
-      const ellipsis = (this.renderEllipis());
-
-      calculatedItems.unshift(ellipsis);
+      calculatedItems.unshift(
+        <PaginationButton
+          children={<span>...</span>}
+          key={0}
+        />
+      );
     }
 
     if (startPages !== items - maxButtons + 1) {
-      const ellipsis = (this.renderEllipis());
-
-      calculatedItems.push(ellipsis);
+      calculatedItems.push(
+        <PaginationButton
+          children={<span>...</span>}
+          key={items + 1}
+        />
+      );
     }
 
     return calculatedItems;
@@ -87,9 +83,18 @@ export default class Pagination extends Component {
       <PaginationButton
         children={element}
         handleSelect={this.handleSelect.bind(this)}
-        key={num}
         pageNumber={num}
         selected={this.state.activatedPage === num}
+      />
+    );
+  }
+
+  renderGoToButton(icon, key) {
+    const element = (<i className={`fa fa-${icon}`}></i>);
+    return (
+      <PaginationButton
+        children={element}
+        handleSelect={this.handleSelect.bind(this, key)}
       />
     );
   }
@@ -100,9 +105,23 @@ export default class Pagination extends Component {
     const last = items;
     return (
       <ul className="cp-pagination">
+        {this.renderGoToButton('angle-double-left', first)}
+        {this.renderGoToButton(
+          'angle-left',
+          this.state.activatedPage <= first ?
+          first :
+          this.state.activatedPage - 1
+        )}
         {this.renderFirstLastButton(first)}
         {this.renderItems()}
         {this.renderFirstLastButton(last)}
+        {this.renderGoToButton(
+          'angle-right',
+          this.state.activatedPage >= items ?
+          items :
+          this.state.activatedPage + 1
+        )}
+        {this.renderGoToButton('angle-double-right', last)}
       </ul>
     );
   }
