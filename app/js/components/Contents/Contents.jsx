@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import ContentsList from './ContentsList';
-import Pagination from '../Commons/Pagination';
+import Pagination from './Pagination';
 
 import * as CategoriesActions from '../../actions/categories';
 
@@ -19,8 +19,15 @@ const mapDispatchToProps = (dispatch) => ({
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Contents extends Component {
 
+  handleUpdateContent = (parameters) => {
+    const { category, offset } = parameters;
+    const { actions } = this.props;
+    actions.categories.fetch(category, Object.assign({}, {
+      offset,
+    }));
+  };
+
   render() {
-    console.log(this.props);
     const { categories: { category, results } } = this.props;
     const list = !results ? null :
       <ContentsList
@@ -28,12 +35,18 @@ export default class Contents extends Component {
         items={results}
       />;
 
+    const pagination = !category ? null :
+      <Pagination
+        category={category}
+        items={20}
+        limit={20}
+        onRequest={::this.handleUpdateContent}
+      />;
+
     return (
       <div className="cp-wrapper">
         {list}
-        <Pagination
-          items={20}
-        />
+        {pagination}
       </div>
     );
   }
