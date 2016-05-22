@@ -1,3 +1,5 @@
+import { api } from '../../../global.config.babel';
+import queryString from 'query-string';
 import toastr from '../tools/toastr';
 
 const checkStatus = (response) => {
@@ -7,9 +9,21 @@ const checkStatus = (response) => {
   return response.text().then((text) => Promise.reject(text));
 };
 
-export default (path, options = {}) =>
-  fetch(
-    path,
+export default (path, parameters, options = {}) => {
+
+  const defaultParameters = {
+    ts: api.keys.timestamp,
+    apikey: api.keys.public,
+    hash: api.md5,
+  };
+
+  const basePath = `${api.path}/${path}`;
+  const updatedParameters = Object.assign({}, defaultParameters, parameters);
+
+  const qsParameters = queryString.stringify(updatedParameters);
+
+  return fetch(
+    `${basePath}?${qsParameters}`,
     Object.assign({ credentials: 'same-origin' }, options)
   )
   .then(checkStatus)
@@ -22,3 +36,4 @@ export default (path, options = {}) =>
     toastr('warning', 'Request failed', error);
     return Promise.reject(error);
   });
+};

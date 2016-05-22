@@ -20,6 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 export default class Contents extends Component {
 
   render() {
+    console.log(this.props);
     const { categories: { category, results } } = this.props;
     const list = !results ? null :
       <ContentsList

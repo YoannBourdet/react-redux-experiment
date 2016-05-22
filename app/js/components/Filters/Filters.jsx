@@ -30,9 +30,14 @@ export default class Filters extends Component {
     actions.filters.add('filter', value);
   };
 
-  handleUpdateCheckbox = (value) => {
+  handleUpdateCheckbox = (category, offset = 0, limit = 20) => {
     const { actions } = this.props;
-    actions.categories.fetch(value);
+    const parameters = Object.assign({}, {
+      limit,
+      offset,
+    });
+
+    actions.categories.fetch(category, parameters);
   };
 
   render() {
