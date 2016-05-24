@@ -30,9 +30,9 @@ export default class Filters extends Component {
     actions.filters.add('filter', value);
   };
 
-  handleUpdateCheckbox = (value) => {
+  handleUpdateCheckbox = (category) => {
     const { actions } = this.props;
-    actions.categories.fetch(value);
+    actions.categories.fetch(category);
   };
 
   render() {
@@ -43,7 +43,7 @@ export default class Filters extends Component {
           filter={AutoComplete.fuzzyFilter}
           floatingLabelText="Type t, fuzzy search"
           fullWidth
-          onUpdateInput={this.handleUpdateInput.bind(this)}
+          onUpdateInput={::this.handleUpdateInput}
         />
         <FiltersCheckboxes
           items={[
@@ -54,7 +54,7 @@ export default class Filters extends Component {
             { label: 'series', value: 'series' },
             { label: 'stories', value: 'stories' },
           ]}
-          onRequest={this.handleUpdateCheckbox.bind(this)}
+          onRequest={::this.handleUpdateCheckbox}
         />
       </div>
     );

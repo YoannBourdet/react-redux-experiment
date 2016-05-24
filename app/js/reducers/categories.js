@@ -4,10 +4,11 @@ export default (state = {}, action) => {
   switch(action.type) {
     case FETCH_CATEGORIES:
       const category = action.category;
-      const { results } = action.data;
+      const data = action.data;
+      console.log('data', data);
       return Object.assign({}, state, {
         category,
-        results,
+        data,
       });
     default:
       return state;
