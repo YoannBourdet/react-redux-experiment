@@ -5,6 +5,7 @@ export default class Pagination extends Component {
 
   static propTypes = {
     activatedPage: PropTypes.number,
+    disabled: PropTypes.bool,
     category: PropTypes.string.isRequired,
     items: PropTypes.number.isRequired,
     limit: PropTypes.number.isRequired,
@@ -22,11 +23,13 @@ export default class Pagination extends Component {
   }
 
   handleSelect(eventKey) {
-    const { category, limit, onRequest } = this.props;
-    const offset = (eventKey * limit) - limit;
-    this.setState({ activatedPage: eventKey });
-    if(onRequest) {
-      onRequest({ category, offset });
+    if (!this.props.disabled) {
+      const { category, limit, onRequest } = this.props;
+      const offset = (eventKey * limit) - limit;
+      this.setState({ activatedPage: eventKey });
+      if(onRequest) {
+        onRequest({ category, offset });
+      }
     }
   }
 

@@ -18,28 +18,35 @@ const mapDispatchToProps = (dispatch) => ({
 
 @connect(mapStateToProps, mapDispatchToProps)
 export default class Contents extends Component {
+  state = {
+    disabledPagination: false,
+  }
 
   handleUpdateContent = (parameters) => {
+    this.setState({ disabledPagination: !this.state.disabledPagination });
     const { category, offset } = parameters;
     const { actions } = this.props;
     actions.categories.fetch(category, Object.assign({}, {
       offset,
-    }));
+    })).then(() => {
+      this.setState({ disabledPagination: !this.state.disabledPagination });
+    });
   };
 
   render() {
-    const { categories: { category, results } } = this.props;
-    const list = !results ? null :
+    const { categories: { category, data } } = this.props;
+    const list = !data ? null :
       <ContentsList
         category={category}
-        items={results}
+        items={data.results}
       />;
 
-    const pagination = !category ? null :
+    const pagination = !category && !data ? null :
       <Pagination
         category={category}
-        items={20}
-        limit={20}
+        disabled={this.state.disabledPagination}
+        items={~~(data.total / data.limit)}
+        limit={data.limit}
         onRequest={::this.handleUpdateContent}
       />;
 
