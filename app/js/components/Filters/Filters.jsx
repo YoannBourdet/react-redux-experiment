@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
@@ -13,8 +14,8 @@ const mapStateToProps = (state) => state;
 
 const mapDispatchToProps = (dispatch) => ({
   actions: {
-    filters: bindActionCreators(FiltersActions, dispatch),
     categories: bindActionCreators(CategoriesActions, dispatch),
+    filters: bindActionCreators(FiltersActions, dispatch),
   },
 });
 
@@ -26,8 +27,14 @@ export default class Filters extends Component {
   };
 
   handleUpdateInput = (value) => {
-    const { actions } = this.props;
-    actions.filters.add('filter', value);
+    const { actions, categories: { category } } = this.props;
+    actions.filters.add('contents', value);
+
+    const query = !value ? {} : {
+      nameStartsWith: value,
+    };
+
+    actions.categories.fetch(category, query);
   };
 
   handleUpdateCheckbox = (category) => {
