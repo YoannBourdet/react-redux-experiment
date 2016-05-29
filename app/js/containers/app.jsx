@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
-import { Filters } from '../components/filters/';
+import { Header } from '../components/Header/';
+import { Filters } from '../components/Filters/';
 import { Contents } from '../components/Contents/';
 
 import MyRawTheme from '../theme';
@@ -14,6 +15,7 @@ export default class App extends Component {
     return (
       <MuiThemeProvider muiTheme={muiTheme}>
         <div className="app">
+          <Header />
           <Filters />
           <Contents />
         </div>
