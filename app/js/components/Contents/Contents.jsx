@@ -56,8 +56,11 @@ export default class Contents extends Component {
         onRequest={::this.handleUpdateContent}
       />;
 
+    const results = !data ? 0 : data.total;
+
     return (
       <div className="cp-wrapper">
+        <span>{results} results found</span>
         {list}
         {pagination}
       </div>
