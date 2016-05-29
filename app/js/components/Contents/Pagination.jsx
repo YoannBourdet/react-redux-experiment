@@ -75,7 +75,8 @@ export default class Pagination extends Component {
       );
     }
 
-    if (startPages !== items - maxButtons + 1) {
+    if (startPages !== items - maxButtons + 1 &&
+      this.props.items > this.props.maxButtons) {
       calculatedItems.push(
         <PaginationButton
           children={<span>...</span>}
@@ -87,9 +88,21 @@ export default class Pagination extends Component {
     return calculatedItems;
   }
 
-  renderFirstLastButton(num) {
+  renderFirstButton(num) {
     const element = (<span>{num}</span>);
     return (
+      <PaginationButton
+        children={element}
+        handleSelect={this.handleSelect.bind(this)}
+        pageNumber={num}
+        selected={this.state.activatedPage === num}
+      />
+    );
+  }
+
+  renderLastButton(num) {
+    const element = (<span>{num}</span>);
+    return this.props.items < this.props.maxButtons ? null : (
       <PaginationButton
         children={element}
         handleSelect={this.handleSelect.bind(this)}
@@ -113,7 +126,8 @@ export default class Pagination extends Component {
     const { items } = this.props;
     const first = 1;
     const last = items;
-    return (
+
+    return items < 2 ? null : (
       <ul className="cp-pagination">
         {this.renderGoToButton('angle-double-left', first)}
         {this.renderGoToButton(
@@ -122,9 +136,9 @@ export default class Pagination extends Component {
           first :
           this.state.activatedPage - 1
         )}
-        {this.renderFirstLastButton(first)}
+        {this.renderFirstButton(first)}
         {this.renderItems()}
-        {this.renderFirstLastButton(last)}
+        {this.renderLastButton(last)}
         {this.renderGoToButton(
           'angle-right',
           this.state.activatedPage >= items ?

@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
@@ -6,6 +7,7 @@ import { connect } from 'react-redux';
 import ContentsList from './ContentsList';
 import Pagination from './Pagination';
 
+import * as FiltersActions from '../../actions/filters';
 import * as CategoriesActions from '../../actions/categories';
 
 const mapStateToProps = (state) => state;
@@ -13,6 +15,7 @@ const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
   actions: {
     categories: bindActionCreators(CategoriesActions, dispatch),
+    filters: bindActionCreators(FiltersActions, dispatch),
   },
 });
 
@@ -25,10 +28,13 @@ export default class Contents extends Component {
   handleUpdateContent = (parameters) => {
     this.setState({ disabledPagination: !this.state.disabledPagination });
     const { category, offset } = parameters;
-    const { actions } = this.props;
-    actions.categories.fetch(category, Object.assign({}, {
-      offset,
-    })).then(() => {
+    const { actions, filters } = this.props;
+
+    const query = !filters.contents ?
+      { offset } :
+      { offset, nameStartsWith: filters.contents };
+
+    actions.categories.fetch(category, query).then(() => {
       this.setState({ disabledPagination: !this.state.disabledPagination });
     });
   };

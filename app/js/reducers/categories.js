@@ -5,7 +5,6 @@ export default (state = {}, action) => {
     case FETCH_CATEGORIES:
       const category = action.category;
       const data = action.data;
-      console.log('data', data);
       return Object.assign({}, state, {
         category,
         data,
